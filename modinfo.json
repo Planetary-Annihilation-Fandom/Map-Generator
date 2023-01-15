@@ -19,7 +19,8 @@
     
     "category": [
         "ui",
-        "lobby"
+        "lobby",
+        "titans"
     ],
     "scenes": {
         "new_game": [
