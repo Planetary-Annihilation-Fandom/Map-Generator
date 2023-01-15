@@ -1,0 +1,26 @@
+{
+    "author": "Tatarstan",
+
+    "build": "116400",
+    "context": "client",
+    "version": "1.0",
+    
+    "date": "2023/01/16",
+    "description": "Map Generator for modern lobbies!",
+    "display_name": "Map Generator",
+
+    "enabled": true,
+    "priority": 100,
+
+    "identifier": "com.pa.map.generator",
+    
+    "category": [
+        "ui",
+        "lobby"
+    ],
+    "scenes": {
+        "new_game": [
+            "coui://ui/mods/map-generator/new_game.js"
+        ]
+    }
+}
