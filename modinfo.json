@@ -9,6 +9,9 @@
     "description": "Map Generator for modern lobbies!",
     "display_name": "Map Generator",
 
+    "github": "https://github.com/Planetary-Annihilation-Fandom/Map-Generator",
+    "icon": "https://github.com/Planetary-Annihilation-Fandom/Map-Generator/blob/master/icon.png",
+
     "enabled": true,
     "priority": 100,
 
