@@ -3,14 +3,14 @@
 
     "build": "116400",
     "context": "client",
-    "version": "1.0",
+    "version": "1.1",
     
     "date": "2023/01/16",
     "description": "Map Generator for modern lobbies!",
     "display_name": "Map Generator",
 
     "github": "https://github.com/Planetary-Annihilation-Fandom/Map-Generator",
-    "icon": "https://github.com/Planetary-Annihilation-Fandom/Map-Generator/blob/master/icon.png",
+    "icon": "https://raw.githubusercontent.com/Planetary-Annihilation-Fandom/Map-Generator/master/icon.png",
     "forum":"https://steamcommunity.com/app/386070/discussions/0/5400412499755321533/",
 
     "enabled": true,
