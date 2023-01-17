@@ -157,8 +157,8 @@ function generateBattlefield() {
 
 
 function generateCombox() {
-    getRandomSystem('Combox'), [150, 350], getRandomBiome(), [100, 100],
-        createGenerationOptions(undefined, undefined, getRandomInt(40, 70)).then(function (system) {
+    getRandomSystem('Combox', [150, 350], getRandomBiome(), [100, 100],
+        createGenerationOptions(undefined, undefined, getRandomInt(40, 70))).then(function (system) {
             model.system(system);
             model.updateSystem(model.system());
             model.changeSettings();
