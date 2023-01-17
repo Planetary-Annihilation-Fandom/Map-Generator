@@ -10,20 +10,6 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
 }
 
-
-model.generateAwesomeSystem = function (model, event, seed) {
-    return generateSystem(seed).then(function (system) {
-        model.system(system);
-        model.updateSystem(model.system());
-        model.changeSettings();
-        model.requestUpdateCheatConfig();
-    });
-}
-
-var clip = function (value, min, max) {
-    return Math.min(max, Math.max(min, value));
-}
-
 $(function () {
     $('head').append('<link rel="stylesheet" href="coui://ui/mods/map-generator/asg.css" type="text/css" />');
 
@@ -36,11 +22,6 @@ $(function () {
     ko.applyBindings(model, templatesRoot[0]);
 
     var table = $('<table></table>');
-
-    model.adjustVariable = function (observable, delta, min, max) {
-        var v = model[observable];
-        v(clip(v() + delta, min, max));
-    }
 
     var lastRow;
 
@@ -177,7 +158,7 @@ getRandomBiome = function () {
 }
 
 getRandomSystem = function (planetTitle, planetRadiusRange, biomeName, metalFactorRange) {
-    console.log(biomeName +'passed to the generation')
+    console.log(biomeName +' passed to the generation')
     var seed = getRandomSeed();
     var radius = getRandomInt(planetRadiusRange[0], planetRadiusRange[1]);
     var metalFactor = getRandomInt(metalFactorRange[0], metalFactorRange[1]);
@@ -191,8 +172,6 @@ getRandomSystem = function (planetTitle, planetRadiusRange, biomeName, metalFact
     var slots = model.slots() || 2;
 
     var metalClustersRandom = Math.floor(slots / 10 * 50);
-    // add sign in 50% cases
-    metalClustersRandom *= Math.round(Math.random()) ? 1 : -1;
 
     var metalDensity = metalFactor;
     var metalClusters = 50 + metalClustersRandom;
