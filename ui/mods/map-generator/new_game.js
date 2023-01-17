@@ -175,12 +175,21 @@ function generateWateriya() {
 // TEMPLATES END
 
 // FUNCTIONS
+// Default biomes
 const earthBiome = "earth"
 const desertBiome = "desert"
 const lavaBiome = "lava"
 const tropicalBiome = "tropical"
 const moonBiome = "moon"
 const metalBiome = "metal"
+
+
+// api.mods.getMounted("client", true).then(function (mods) {
+//     var modMounted = function (modIdentifier) {
+//       return _.some(mods, { identifier: modIdentifier });
+//     };
+//     // Shared Systems for Galactic War
+//     if (modMounted("com.wondible.pa.gw_shared_systems"))
 
 function getAllPossibleBiomes() {
     const defaultBiomes = [earthBiome, desertBiome, lavaBiome, tropicalBiome, moonBiome, metalBiome]
