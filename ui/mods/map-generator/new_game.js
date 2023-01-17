@@ -83,8 +83,10 @@ $(function () {
     arenaContainer.append(arenaButton3);
 
     var specificContainer = $('<div></div>')
+    var comboxButton = createButton("Combox", "generateCombox")
     var wadiyaButton = createButton("Wadiya", "generateWadiya")
     var wateriyaButton = createButton("Wateriya", "generateWateriya")
+    specificContainer.append(comboxButton)
     specificContainer.append(wadiyaButton)
     specificContainer.append(wateriyaButton)
 
@@ -103,7 +105,6 @@ $(function () {
 
 // TEMPLATES
 function generateJebus() {
-    // var sys = getRandomSystem('Jebus', [380, 500], getRandomBiome(), [30, 30])
 
     getRandomSystem('Jebus', [380, 500], getRandomBiome(), [30, 30]).then(function (system) {
         model.system(system);
@@ -154,6 +155,16 @@ function generateBattlefield() {
     });
 }
 
+
+function generateCombox() {
+    getRandomSystem('Combox'), [150, 350], getRandomBiome(), [100, 100],
+        createGenerationOptions(undefined, undefined, getRandomInt(40, 70)).then(function (system) {
+            model.system(system);
+            model.updateSystem(model.system());
+            model.changeSettings();
+            model.requestUpdateCheatConfig();
+        })
+}
 function generateWadiya() {
     getRandomSystem('Wadiya', [600, 800], moonBiome, [80, 100],
         createGenerationOptions(undefined, 0, undefined)).then(function (system) {
@@ -161,7 +172,7 @@ function generateWadiya() {
             model.updateSystem(model.system());
             model.changeSettings();
             model.requestUpdateCheatConfig();
-        });
+        })
 }
 function generateWateriya() {
     getRandomSystem('Wateriya', [600, 800], getRandomBiome([earthBiome, tropicalBiome]), [80, 100],
@@ -170,7 +181,7 @@ function generateWateriya() {
             model.updateSystem(model.system());
             model.changeSettings();
             model.requestUpdateCheatConfig();
-        });
+        })
 }
 // TEMPLATES END
 
@@ -228,7 +239,7 @@ function createGenerationOptions(temperature, waterDepth, height) {
     return { temperature: temperature, waterDepth: waterDepth, height: height }
 }
 
-getRandomSystem = function (planetTitle, planetRadiusRange, biomeName, metalFactorRange,
+function getRandomSystem(planetTitle, planetRadiusRange, biomeName, metalFactorRange,
     generationOptions = undefined) {
 
     if (generationOptions === undefined)
