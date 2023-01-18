@@ -5,7 +5,7 @@ function getRandomSeed() {
 // min and max is inclusive (tatarstan)
 function getRandomInt(min, max) {
 
-    if (min === max)
+    if (min == max)
         return max;
 
     min = Math.ceil(min);
@@ -15,7 +15,22 @@ function getRandomInt(min, max) {
 }
 
 function getRandomIndex(length) {
-    Math.floor(Math.random() * length);
+    return Math.floor(Math.random() * length);
+}
+
+function getRandomWeightedIndex(weights) {
+    var index;
+    for (index = 0; index < weights.length; index++)
+        weights[index] += weights[index - 1] || 0;
+
+    const random = Math.random() * weights[weights.length - 1];
+
+    for (index = 0; index < weights.length; index++)
+        if (weights[index] > random)
+            break;
+
+    // console.log('weighted random ' + index + ' : ' + random + ' : ' + weights)
+    return index;
 }
 
 $(function () {
@@ -207,42 +222,55 @@ function getAllPossibleBiomes() {
     return defaultBiomes
 }
 
-function getRandomBiome(biomes = undefined) {
-    if (biomes === undefined)
+function getRandomBiome(biomes) {
+    if (biomes == undefined)
         biomes = getAllPossibleBiomes();
 
     const random = getRandomIndex(biomes.length);
-    console.log(random, biomes[random]);
     return biomes[random];
 }
 
 function getOneOfWaterGenerationOption() {
     const types = ["random", "nowater", "muchwater"]
-    const type = types[getRandomIndex(types.length)]
+
+    var i = 0;
+    var r = 0;
+    var n = 0;
+    var m = 0;
+    for (i = 0; i < 1000; i++) {
+        var type = types[getRandomWeightedIndex([60, 20, 20])]
+
+        switch (type) {
+            case "random": r++; break;
+            case "nowater": n++; break;
+            case "muchwater": m++; break;
+        }
+    }
 
     switch (type) {
-        case "random": return getRandomInt(0, 50); break;
+        case "random": return getRandomInt(30, 50); break;
         case "nowater": return 0; break;
         case "muchwater": return getRandomInt(50, 70); break;
     }
+    console.log('rand-' + r + ' no-' + n + ' much-' + m)
     return 0
 }
 
 // Use undefined to get random value
 function createGenerationOptions(temperature, waterDepth, height) {
-    if (temperature === undefined)
+    if (temperature == undefined)
         temperature = getRandomInt(0, 100)
-    if (waterDepth === undefined)
+    if (waterDepth == undefined)
         waterDepth = getOneOfWaterGenerationOption();
-    if (height === undefined)
-        height = getRandomInt(0, 60);
+    if (height == undefined)
+        height = getRandomInt(20, 60);
     return { temperature: temperature, waterDepth: waterDepth, height: height }
 }
 
 function getRandomSystem(planetTitle, planetRadiusRange, biomeName, metalFactorRange,
-    generationOptions = undefined) {
+    generationOptions) {
 
-    if (generationOptions === undefined)
+    if (generationOptions == undefined)
         generationOptions = createGenerationOptions(undefined, undefined, undefined)
 
     console.log(biomeName + ' passed to the generation')
