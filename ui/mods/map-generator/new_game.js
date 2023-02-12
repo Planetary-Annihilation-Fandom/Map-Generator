@@ -208,6 +208,7 @@ const lavaBiome = "lava"
 const tropicalBiome = "tropical"
 const moonBiome = "moon"
 const metalBiome = "metal"
+const asteroidBiome = "asteroid" 
 
 
 // api.mods.getMounted("client", true).then(function (mods) {
@@ -218,7 +219,7 @@ const metalBiome = "metal"
 //     if (modMounted("com.wondible.pa.gw_shared_systems"))
 
 function getAllPossibleBiomes() {
-    const defaultBiomes = [earthBiome, desertBiome, lavaBiome, tropicalBiome, moonBiome, metalBiome]
+    const defaultBiomes = [earthBiome, desertBiome, lavaBiome, tropicalBiome, moonBiome, metalBiome,asteroidBiome]
     return defaultBiomes
 }
 
@@ -248,7 +249,7 @@ function getOneOfWaterGenerationOption() {
     }
 
     switch (type) {
-        case "random": return getRandomInt(30, 50); break;
+        case "random": return getRandomInt(5, 50); break;
         case "nowater": return 0; break;
         case "muchwater": return getRandomInt(50, 70); break;
     }
@@ -327,7 +328,7 @@ function getRandomSystem(planetTitle, planetRadiusRange, biomeName, metalFactorR
     }
 
     var rSystem = {
-        name: planetTitle + ' C' + metalClusters + ' D' + metalDensity,
+        name: planetTitle + ' C' + metalClusters + ' D' + metalDensity + ' W'+ waterDepth,
         isRandomlyGenerated: true,
         players: [slots, slots]
     };
