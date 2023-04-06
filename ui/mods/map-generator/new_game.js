@@ -202,14 +202,16 @@ function generateWateriya() {
 
 // FUNCTIONS
 // Default biomes
-const earthBiome = "earth"
-const desertBiome = "desert"
-const lavaBiome = "lava"
-const tropicalBiome = "tropical"
-const moonBiome = "moon"
+const earthBiome = "earth_lite"
+const desertBiome = "desert_lite"
+const lavaBiome = "lava_lite"
+const tropicalBiome = "tropical_lite"
+const moonBiome = "moon_lite"
+
 const metalBiome = "metal"
 const asteroidBiome = "asteroid" 
-
+// Expansion biomes
+//const greenhouseBiome = "greenhouse"
 
 // api.mods.getMounted("client", true).then(function (mods) {
 //     var modMounted = function (modIdentifier) {
@@ -219,7 +221,8 @@ const asteroidBiome = "asteroid"
 //     if (modMounted("com.wondible.pa.gw_shared_systems"))
 
 function getAllPossibleBiomes() {
-    const defaultBiomes = [earthBiome, desertBiome, lavaBiome, tropicalBiome, moonBiome, metalBiome,asteroidBiome]
+    const defaultBiomes = [earthBiome, desertBiome, lavaBiome, tropicalBiome, moonBiome, metalBiome, asteroidBiome]
+    //const expansionBiomes = [greenhouseBiome]
     return defaultBiomes
 }
 
@@ -249,9 +252,9 @@ function getOneOfWaterGenerationOption() {
     }
 
     switch (type) {
-        case "random": return getRandomInt(5, 50); break;
+        case "random": return getRandomInt(20, 40); break;
         case "nowater": return 0; break;
-        case "muchwater": return getRandomInt(50, 70); break;
+        case "muchwater": return getRandomInt(40, 70); break;
     }
     console.log('rand-' + r + ' no-' + n + ' much-' + m)
     return 0
