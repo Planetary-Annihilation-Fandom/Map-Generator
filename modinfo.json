@@ -1,41 +1,4 @@
 {
-    "author": "TATAPSTAR",
-
-    "build": "116400",
-    "context": "client",
-    "version": "2.0.0",
-    
-    "date": "2023/04/06",
-    "description": "Map Generator for modern lobbies!",
-    "display_name": "Map Generator",
-
-    "github": "https://github.com/Planetary-Annihilation-Fandom/Map-Generator",
-    "icon": "https://raw.githubusercontent.com/Planetary-Annihilation-Fandom/Map-Generator/master/icon.png",
-    "forum":"https://steamcommunity.com/app/386070/discussions/0/5400412499755321533/",
-
-    "enabled": true,
-    "priority": 100,
-
-    "identifier": "com.pa.map.generator",
-    
-    "category": [
-        "ui",
-        "lobby",
-        "titans"
-    ],
-    "scenes": {
-        "new_game": [
-            "coui://ui/mods/map-generator/new_game.js"
-        ]
-    },
-
-    "dependencies":[
-        "com.pa.biomes.lite.server"
-    ]
-}
-
-
-{
     "identifier": "com.pa.map.generator",
     "author":"TATAPSTAR",
 
