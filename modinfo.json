@@ -22,7 +22,7 @@
     "context":"client",
     "priority": 100,
 
-    "dpendencies":[
+    "dependencies":[
         "com.pa.biomes.lite.server"
     ],
 
