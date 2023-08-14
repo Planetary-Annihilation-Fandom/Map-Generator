@@ -1,9 +1,9 @@
 {
-    "identifier": "com.pa.map.generator",
+    "identifier": "com.pa.map.generator.dev",
     "author":"TATAPSTAR",
 
     "icon": "https://raw.githubusercontent.com/Planetary-Annihilation-Fandom/Map-Generator/master/icon.png",
-    "display_name": "Lobby Map Generator",
+    "display_name": "map.generator.dev",
     "description": "Map Generator for modern lobbies!",
     
     "category":[

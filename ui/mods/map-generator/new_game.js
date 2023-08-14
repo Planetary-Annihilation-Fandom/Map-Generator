@@ -34,10 +34,10 @@ function getRandomWeightedIndex(weights) {
 }
 
 $(function () {
-    $('head').append('<link rel="stylesheet" href="coui://ui/mods/map-generator/asg.css" type="text/css" />');
+    $('head').append('<link rel="stylesheet" href="coui://ui/mods/map-generator/map_generator.css" type="text/css" />');
 
     var root = $('.system-options');
-    var templatesRoot = $('<div id="ap-controls" data-bind="visible: canChangeSettings"></div>');
+    var templatesRoot = $('<div id="ap-controls" class="box_highlight" data-bind="visible: canChangeSettings"></div>');
     // insert our panel to system options
 
     root.append(templatesRoot);
@@ -55,14 +55,19 @@ $(function () {
         row.append(data)
         table.append(row);
 
-        ko.applyBindings(model, row[0]);
-        lastRow = data;
+        lastRow = row;
     }
+    // Not working correctly (binding)
     var addToTableRow = function (element) {
         var data = $('<td class="td"></td>');
         data.append(element);
-        lastRow.append(element)
-        ko.applyBindings(model, data[0]);
+        lastRow.append(data);
+        console.log("row is")
+        console.log(lastRow[0])
+    }
+
+    function applyBindingsToLastRow(){
+        ko.applyBindings(model, lastRow[0]);
     }
 
     var createButton = function (name, method) {
@@ -77,25 +82,25 @@ $(function () {
 
 
     // templatesRoot.append($('<hr/>'))
-    templatesRoot.append($('<label class="section_title_main"><b>TEMPLATES</b></label>'))
+    templatesRoot.append($('<label class="section_title_main"><b>Generate Planet</b></label>'))
     templatesRoot.append(table);
 
     // addToTable(button);
     var duelContainer = $('<div></div>')
-    var duelButton = createButton('Jebus', 'generateJebus');
-    var duelButton2 = createButton('Macro', 'generateMacro');
-    var duelButton3 = createButton('Titans', 'generateTitans');
+    var duelButton = createButton('Small', 'generateSmall');
+    var duelButton2 = createButton('Medium', 'generateMedium');
+    var duelButton3 = createButton('Large', 'generateLarge');
     duelContainer.append(duelButton);
     duelContainer.append(duelButton2);
     duelContainer.append(duelButton3);
 
-    var arenaContainer = $('<div></div>')
-    var arenaButton = createButton('Berserk', 'generateBerserk');
-    var arenaButton2 = createButton('Arena', 'generateArena');
-    var arenaButton3 = createButton('Battlefield', 'generateBattlefield');
-    arenaContainer.append(arenaButton);
-    arenaContainer.append(arenaButton2);
-    arenaContainer.append(arenaButton3);
+    // var arenaContainer = $('<div></div>')
+    // var arenaButton = createButton('Small', 'generateBerserk');
+    // var arenaButton2 = createButton('Medium', 'generateArena');
+    // var arenaButton3 = createButton('Large', 'generateBattlefield');
+    // arenaContainer.append(arenaButton);
+    // arenaContainer.append(arenaButton2);
+    // arenaContainer.append(arenaButton3);
 
     var specificContainer = $('<div></div>')
     var comboxButton = createButton("Combox", "generateCombox")
@@ -106,69 +111,72 @@ $(function () {
     specificContainer.append(wateriyaButton)
 
 
-    addToTable($('<label class="section_title_inner_duel"><b>Duel:</b></label>'))
-    addToTable(duelContainer)
-    addToTable($('<label class="section_title_inner_arena"><b>FFA:</b></label>'))
-    addToTable(arenaContainer)
+    addToTable($('<label class="section_title_inner_duel"><b>Template:</b></label>'))
+    addToTableRow(duelContainer)
+    applyBindingsToLastRow()
+    // addToTable($('<label class="section_title_inner_arena"><b>FFA:</b></label>'))
+    // addToTable(arenaContainer)
     addToTable($('<label class="section_title_inner_wadiya"><b>Specific:</b></label>'))
-    addToTable(specificContainer)
+    addToTableRow(specificContainer)
+    applyBindingsToLastRow()
 
-    ko.applyBindings(model, duelContainer);
-    ko.applyBindings(model, arenaContainer);
-    ko.applyBindings(model, specificContainer);
+    //ko.applyBindings(model, duelContainer);
+    // ko.applyBindings(model, arenaContainer);
+    //ko.applyBindings(model, specificContainer);
+    
 })
 
 // TEMPLATES
-function generateJebus() {
+function generateSmall() {
+    console.log("fuck")
+    getRandomSystem('Small', [400, 500], getRandomBiome(), [30, 30]).then(function (system) {
+        model.system(system);
+        model.updateSystem(model.system());
+        model.changeSettings();
+        model.requestUpdateCheatConfig();
+    });
+}
+function generateMedium() {
+    getRandomSystem('Medium', [500, 700], getRandomBiome(), [30, 40]).then(function (system) {
+        model.system(system);
+        model.updateSystem(model.system());
+        model.changeSettings();
+        model.requestUpdateCheatConfig();
+    });
+}
+function generateLarge() {
+    getRandomSystem('Large', [700, 1300], getRandomBiome(), [40, 50]).then(function (system) {
+        model.system(system);
+        model.updateSystem(model.system());
+        model.changeSettings();
+        model.requestUpdateCheatConfig();
+    });
+}
 
-    getRandomSystem('Jebus', [380, 500], getRandomBiome(), [30, 30]).then(function (system) {
-        model.system(system);
-        model.updateSystem(model.system());
-        model.changeSettings();
-        model.requestUpdateCheatConfig();
-    });
-}
-function generateMacro() {
-    getRandomSystem('Macro', [450, 600], getRandomBiome(), [40, 50]).then(function (system) {
-        model.system(system);
-        model.updateSystem(model.system());
-        model.changeSettings();
-        model.requestUpdateCheatConfig();
-    });
-}
-function generateTitans() {
-    getRandomSystem('Titans', [500, 700], getRandomBiome(), [50, 60]).then(function (system) {
-        model.system(system);
-        model.updateSystem(model.system());
-        model.changeSettings();
-        model.requestUpdateCheatConfig();
-    });
-}
-
-function generateBerserk() {
-    getRandomSystem('Berserk', [380, 500], getRandomBiome(), [35, 40]).then(function (system) {
-        model.system(system);
-        model.updateSystem(model.system());
-        model.changeSettings();
-        model.requestUpdateCheatConfig();
-    });
-}
-function generateArena() {
-    getRandomSystem('Arena', [450, 650], getRandomBiome(), [40, 50]).then(function (system) {
-        model.system(system);
-        model.updateSystem(model.system());
-        model.changeSettings();
-        model.requestUpdateCheatConfig();
-    });
-}
-function generateBattlefield() {
-    getRandomSystem('Battlefield', [600, 1300], getRandomBiome(), [50, 60]).then(function (system) {
-        model.system(system);
-        model.updateSystem(model.system());
-        model.changeSettings();
-        model.requestUpdateCheatConfig();
-    });
-}
+// function generateBerserk() {
+//     getRandomSystem('Berserk', [380, 500], getRandomBiome(), [35, 40]).then(function (system) {
+//         model.system(system);
+//         model.updateSystem(model.system());
+//         model.changeSettings();
+//         model.requestUpdateCheatConfig();
+//     });
+// }
+// function generateArena() {
+//     getRandomSystem('Arena', [450, 650], getRandomBiome(), [40, 50]).then(function (system) {
+//         model.system(system);
+//         model.updateSystem(model.system());
+//         model.changeSettings();
+//         model.requestUpdateCheatConfig();
+//     });
+// }
+// function generateBattlefield() {
+//     getRandomSystem('Battlefield', [600, 1300], getRandomBiome(), [50, 60]).then(function (system) {
+//         model.system(system);
+//         model.updateSystem(model.system());
+//         model.changeSettings();
+//         model.requestUpdateCheatConfig();
+//     });
+// }
 
 
 function generateCombox() {
@@ -271,7 +279,7 @@ function createGenerationOptions(temperature, waterDepth, height) {
     return { temperature: temperature, waterDepth: waterDepth, height: height }
 }
 
-function getRandomSystem(planetTitle, planetRadiusRange, biomeName, metalFactorRange,
+function getRandomSystem(planetTitle, planetRadiusRange, biomeName, metalDensityRange,
     generationOptions) {
 
     if (generationOptions == undefined)
@@ -282,7 +290,7 @@ function getRandomSystem(planetTitle, planetRadiusRange, biomeName, metalFactorR
     // Gameplay
     var seed = getRandomSeed();
     var radius = getRandomInt(planetRadiusRange[0], planetRadiusRange[1]);
-    var metalFactor = getRandomInt(metalFactorRange[0], metalFactorRange[1]);
+    var metalDensity = getRandomInt(metalDensityRange[0], metalDensityRange[1]);
 
     // Planet surface
     const temperature = generationOptions.temperature;
@@ -295,11 +303,16 @@ function getRandomSystem(planetTitle, planetRadiusRange, biomeName, metalFactorR
     // Players
     var slots = model.slots() || 2;
 
-    var metalSlotsMultiplier = Math.floor(slots / 10 * 50);
+    // additional 50 metalDensity
+    var slotFactor = 10/slots;
+    var metalSlotsMultiplier = Math.floor(slotFactor * 10);
 
-    var metalDensity = metalFactor + metalSlotsMultiplier;
-    var metalClusters = 50 + metalSlotsMultiplier;
+    var metalDensityResult = metalDensity + metalSlotsMultiplier;
+    var metalClusters = 100*(1/slotFactor) + metalSlotsMultiplier;
 
+    var landingZoneSize = radius/10;
+
+    console.log("making planet settings")
     var planet = {
         mass: mass,
         intended_radius: radius,
@@ -318,20 +331,23 @@ function getRandomSystem(planetTitle, planetRadiusRange, biomeName, metalFactorR
             waterHeight: waterDepth,
             waterDepth: 50,
             temperature: temperature,
-            biomeScale: 100,
-            metalDensity: metalDensity,
+            // i dont know what biomeScale does
+            biomeScale: getRandomInt(50,100),
+            metalDensity: metalDensityResult,
             metalClusters: metalClusters,
-            landingZoneSize: 0,
-            landingZonesPerArmy: 0,
-            numArmies: 2,
-            symmetricalMetal: false,
-            symmetricalStarts: false,
+            landingZoneSize: landingZoneSize,
+            landingZonesPerArmy: Math.floor(slotFactor),
+            numArmies: slots,
+            symmetricalMetal: true,
+            symmetricalStarts: true,
             symmetryType: "none"
         }
     }
 
+    console.log(planet);
+
     var rSystem = {
-        name: planetTitle + ' C' + metalClusters + ' D' + metalDensity + ' W'+ waterDepth,
+        name: planetTitle + ' C' + metalClusters + ' D' + metalDensityResult + ' W'+ waterDepth,
         isRandomlyGenerated: true,
         players: [slots, slots]
     };
