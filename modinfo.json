@@ -15,9 +15,9 @@
     "forum": "https://steamcommunity.com/app/386070/discussions/0/5400412499755321533/",
     "github": "https://github.com/Planetary-Annihilation-Fandom/Map-Generator",
 
-    "build": "116400",
+    "build": "120799",
     "version": "2.0.0-up0",
-    "date": "2023-04-08",
+    "date": "2024-05-11",
     
     "context":"client",
     "priority": 100,
